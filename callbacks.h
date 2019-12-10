@@ -1,15 +1,88 @@
 #include <gtk/gtk.h>
 
+
 void
-on_valider_clicked                     (GtkWidget       *obj,
+on_quitter_clicked                     (GtkButton       *button,
                                         gpointer         user_data);
 
 void
-on_affiche_clicked                     (GtkWidget       *objet,
+on_ok_clicked                          (GtkButton       *button,
                                         gpointer         user_data);
 
 void
-on_retour_clicked                      (GtkWidget       *objet,
+on_afficher_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_afficher_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_OK_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_quitter_clicked              (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_recherche_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_supprimer_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_retour_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_modifier_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_OK_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_Ok_clicked                          (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_quitter_clicked              (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_afficher_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_quitter_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_afficher_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_Ok_clicked                          (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_Retour_clicked                      (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_modifier_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_supprimer_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_afficher_clicked                    (GtkButton       *button,
                                         gpointer         user_data);
 
 void
@@ -19,21 +92,25 @@ on_treeview1_row_activated             (GtkTreeView     *treeview,
                                         gpointer         user_data);
 
 void
-on_supprimer_clicked                   (GtkWidget       *button,
-                                        gpointer         user_data);
-
-void
-on_button2_clicked                     (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-on_modf_clicked                        (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
 on_closebutton1_clicked                (GtkButton       *button,
                                         gpointer         user_data);
 
 void
 on_closebutton2_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_closebutton3_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_closebutton4_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button1_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button2_clicked                     (GtkButton       *button,
                                         gpointer         user_data);

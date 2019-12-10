@@ -1,86 +1,201 @@
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
-
+#include <glib/gprintf.h>
 #include <gtk/gtk.h>
-
 
 #include "callbacks.h"
 #include "interface.h"
 #include "support.h"
-#include <string.h>
-#include "hotel.h"
+#include "voiture.h"
 
-
-
-hotel h1;
-hotel y;
-
-/**************************Fonction ajout avec controle*******************************/
+#include "string.h"
+ajout z;
+reserve l;
 void
-on_valider_clicked                     (GtkWidget       *obj,
+on_ok_clicked (GtkButton *button,gpointer  user_data)
+{
+reserve r;
+GtkWidget *nbj;
+GtkWidget *px;
+GtkWidget *jr=lookup_widget(GTK_WIDGET(button),"jr");
+GtkWidget *ms=lookup_widget(GTK_WIDGET(button),"ms");
+GtkWidget *an=lookup_widget(GTK_WIDGET(button),"an");
+GtkWidget *marque=lookup_widget(GTK_WIDGET(button),"marque2");
+GtkWidget *modele=lookup_widget(GTK_WIDGET(button),"modele2");
+GtkWidget *couleur=lookup_widget(GTK_WIDGET(button),"couleur2");
+nbj=lookup_widget(GTK_WIDGET(button),"nbj");
+
+strcpy(r.nbj,gtk_entry_get_text(GTK_ENTRY(nbj)));
+
+strcpy(r.marque,gtk_combo_box_get_active_text(GTK_COMBO_BOX(marque)));
+strcpy(r.modele,gtk_combo_box_get_active_text(GTK_COMBO_BOX(modele)));
+strcpy(r.couleur,gtk_combo_box_get_active_text(GTK_COMBO_BOX(couleur)));
+
+r.dt.jour=(int)gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(jr));
+r.dt.mois=(int)gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(ms));
+r.dt.annee=(int)gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(an));
+/*if((strcmp((gtk_combo_box_get_active_text(GTK_COMBO_BOX(marque))),"")==0)||(strcmp((gtk_combo_box_get_active_text(GTK_COMBO_BOX(modele))),"")==0)||(strcmp((gtk_combo_box_get_active_text(GTK_COMBO_BOX(couleur))),"")==0)||(strcmp((gtk_entry_get_text(GTK_ENTRY(nbj))),"")==0))
+{
+g_print("non");
+GtkWidget *dialog4;
+dialog4=create_dialog4() ;
+gtk_widget_show(dialog4) ;
+}
+else{
+strcpy(l.marque,gtk_combo_box_get_active_text(GTK_COMBO_BOX(marque)));
+strcpy(l.modele,gtk_combo_box_get_active_text(GTK_COMBO_BOX(modele)));
+
+strcpy(l.couleur,gtk_combo_box_get_active_text(GTK_COMBO_BOX(couleur)));
+strcpy(l.nbj,gtk_entry_get_text(GTK_ENTRY(nbj)));
+GtkWidget *dialog3;
+dialog3=create_dialog3() ;
+gtk_widget_show(dialog3) ;
+}*/
+ajouter_resvoit(&r);
+}
+
+void
+on_afficher_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
 {
+GtkWidget *Ajouter_voiture;
+GtkWidget *Fenetre;
+GtkWidget *treeview1;
+g_print("\npointeur sayé");
+Ajouter_voiture=lookup_widget(GTK_WIDGET(button),"Ajouter_voiture");
 
-GtkWidget *input1,*input2,*input3;
-GtkWidget *Etoiles;
-hotel h;
-input1=lookup_widget(obj,"Nom_hotel");
-input2=lookup_widget(obj,"adresse");
-input3=lookup_widget(obj,"num_responsable");
-Etoiles=lookup_widget(obj,"etoiles");
-
-strcpy (h.nom_hotel,gtk_entry_get_text(GTK_ENTRY(input1)));
-strcpy(h.adresse,gtk_entry_get_text(GTK_ENTRY(input2)));
-strcpy(h.num_responsable,gtk_entry_get_text(GTK_ENTRY(input3)));
-h.etoile=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(Etoiles));
+Fenetre=lookup_widget(GTK_WIDGET(button),"Fenetre");
+Fenetre=create_Fenetre();
+gtk_widget_show(Fenetre);
+g_print("\nAffichage sayé");
+treeview1=lookup_widget(Fenetre,"treeview1");
+g_print("\nEntring Affichier\n");
+gtk_widget_destroy(Ajouter_voiture);
+Afficher(treeview1,z);
+}
 
 
-ajout("fichier",&h);
-
-if((strcmp((gtk_entry_get_text(GTK_ENTRY(input1))),"")==0)||(strcmp((gtk_entry_get_text(GTK_ENTRY(input2))),"")==0)||(strcmp((gtk_entry_get_text(GTK_ENTRY(input3))),"")==0))
+void
+on_quitter_clicked              (GtkButton       *button,
+                                        gpointer         user_data)
 {
+gtk_main_quit();
+}
+
+
+
+
+
+void
+on_Ok_clicked                          (GtkButton  *button,gpointer   user_data)
+{
+ajout T;
+GtkWidget *marque,*modele,*couleur,*prix;
+GtkWidget *Ajouter_voiture;
+
+//GtkWidget *jor,*mos,*An;
+//jor=lookup_widget(GTK_WIDGET(button),"spinbutton1");
+//mos=lookup_widget(GTK_WIDGET(button),"spinbutton2");
+//An=lookup_widget(GTK_WIDGET(button),"spinbutton3");
+Ajouter_voiture=lookup_widget(GTK_WIDGET(button),"Ajouter_voiture");
+//Ajouter_voiture=create_Ajouter_voiture();
+//gtk_widget_show(Ajouter_voiture);
+marque=lookup_widget(GTK_WIDGET(button),"marque");
+modele=lookup_widget(GTK_WIDGET(button),"modele");
+couleur=lookup_widget(GTK_WIDGET(button),"couleur");
+prix=lookup_widget(GTK_WIDGET(button),"prix");
+strcpy(T.Marque,gtk_entry_get_text(GTK_ENTRY(marque)));
+strcpy(T.Modele,gtk_entry_get_text(GTK_ENTRY(modele)));
+strcpy(T.Couleur,gtk_entry_get_text(GTK_ENTRY(couleur)));
+strcpy(T.Prix,gtk_entry_get_text(GTK_ENTRY(prix)));
+//T.jr.jour=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(jor));
+//T.jr.mois=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(mos));
+//T.jr.annee=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(An));
+if((strcmp((gtk_entry_get_text(GTK_ENTRY(marque))),"")==0)||(strcmp((gtk_entry_get_text(GTK_ENTRY(modele))),"")==0)||(strcmp((gtk_entry_get_text(GTK_ENTRY(couleur))),"")==0)||(strcmp((gtk_entry_get_text(GTK_ENTRY(prix))),"")==0))
+{
+g_print("non");
 GtkWidget *dialog2;
 dialog2=create_dialog2() ;
 gtk_widget_show(dialog2) ;
 }
+else{
+strcpy(z.Marque,gtk_entry_get_text(GTK_ENTRY(marque)));
+strcpy(z.Modele,gtk_entry_get_text(GTK_ENTRY(modele)));
+
+strcpy(z.Couleur,gtk_entry_get_text(GTK_ENTRY(couleur)));
+strcpy(z.Prix,gtk_entry_get_text(GTK_ENTRY(prix)));
+
+
+GtkWidget *dialog1;
+dialog1=create_dialog1() ;
+gtk_widget_show(dialog1) ;
+}
+Ajouter_voit(&T);
 
 }
 
 
-/**************************Fonction afficher*******************************/
 void
-on_affiche_clicked                     (GtkWidget       *objet,
+on_Retour_clicked                      (GtkButton      *button,
                                         gpointer         user_data)
-{GtkWidget *fenetre_ajout;
-GtkWidget *fenetre_afficher;
-hotel h1;
-GtkWidget *treeview1;
-  fenetre_ajout=lookup_widget(objet,"fenetre_ajout");
-  gtk_widget_destroy(fenetre_ajout);
-  fenetre_afficher=lookup_widget(objet,"fenetre_afficher");
-  fenetre_afficher=create_fenetre_afficher();
-   gtk_widget_show(fenetre_afficher);
-treeview1=lookup_widget(fenetre_afficher,"treeview1");
-afficher_hotel(treeview1,h1);
-
+{GtkWidget *Ajouter_voiture, *Fenetre;
+Fenetre=lookup_widget(GTK_WIDGET(button),"Fenetre");
+gtk_widget_destroy(Fenetre);
+Ajouter_voiture=create_Ajouter_voiture();
+gtk_widget_show(Ajouter_voiture);
 }
 
-/**************************Retour de l'affichage vers l'ajout*******************************/
+
 void
-on_retour_clicked                      (GtkWidget       *objet,
+on_button_modifier_clicked             (GtkButton       *button,
                                         gpointer         user_data)
 {
-GtkWidget *fen_log,*fen2 ;
+//GtkWidget *label=lookup_widget(GTK_WIDGET(button),"label16");
+//gtk_label_set_text(GTK_LABEL(label),v.test);
+dell_user((char *)z.Marque);
+/*****Na3mlo Actualiser lil liste **************/
+GtkWidget *Fenetre=lookup_widget(GTK_WIDGET(button),"Fenetre");
 
-fen2 = lookup_widget(objet,"fenetre_afficher");
-gtk_widget_destroy(fen2);
-fen_log = create_fenetre_ajout();
-gtk_widget_show(fen_log);
+GtkWidget *Ajouter_voiture;
+Ajouter_voiture=lookup_widget(GTK_WIDGET(button),("Ajouter_voiture"));
 
+gtk_widget_destroy(Fenetre);
+Ajouter_voiture=create_Ajouter_voiture();
+gtk_widget_show(Ajouter_voiture);
+GtkWidget *marque=lookup_widget(Ajouter_voiture,"marque");
+GtkWidget *modele=lookup_widget(Ajouter_voiture,"modele");
+GtkWidget *couleur=lookup_widget(Ajouter_voiture,"couleur");
+GtkWidget *prix=lookup_widget(Ajouter_voiture,"prix");
+
+gtk_entry_set_text(GTK_LABEL(marque),z.Marque);
+gtk_entry_set_text(GTK_LABEL(modele),z.Modele);
+gtk_entry_set_text(GTK_LABEL(couleur),z.Couleur);
+gtk_entry_set_text(GTK_LABEL(prix),z.Prix);
 }
 
-/**************************Activation du treeview*******************************/
+
+void
+on_button_supprimer_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+//GtkWidget *label=lookup_widget(GTK_WIDGET(button),"label16");
+//gtk_label_set_text(GTK_LABEL(label),v.test);
+dell_user((char *)z.Marque);
+/*****Na3mlo Actualiser lil liste **************/
+GtkWidget *Fenetre=lookup_widget(GTK_WIDGET(button),"Fenetre");
+GtkWidget *treeview1;
+
+treeview1=lookup_widget(GTK_WIDGET(Fenetre),"treeview1");
+
+Afficher(treeview1,z);
+gtk_widget_show(treeview1);
+}
+
+
+
+
 void
 on_treeview1_row_activated             (GtkTreeView     *treeview,
                                         GtkTreePath     *path,
@@ -91,64 +206,13 @@ gchar *str_data;
 GtkListStore *list_store;
 list_store=gtk_tree_view_get_model(treeview);
 GtkTreeIter   iter;
-
   if (gtk_tree_model_get_iter(GTK_TREE_MODEL(list_store), &iter, path))
   {
-  gtk_tree_model_get(GTK_TREE_MODEL(list_store),&iter,0, &str_data, -1);
+  gtk_tree_model_get(GTK_TREE_MODEL(list_store),&iter, 0, &str_data, -1);
   }
-strcpy(h1.nom_hotel,str_data);
-
+strcpy(z.Marque,str_data);
 }
 
-
-/**************************Fonction supprimer*******************************/
-void
-
-on_supprimer_clicked                   (GtkWidget      *button,
-                                        gpointer         user_data)
-{
-GtkWidget *treeview1;
-supprimer1(&h1.nom_hotel);
-GtkWidget *fenetre_afficher=lookup_widget(GTK_WIDGET(button),"fenetre_afficher");
-treeview1=lookup_widget(fenetre_afficher,"treeview1");
-afficher_hotel(treeview1,h1);
-gtk_widget_show(treeview1);
-
-}
-
-
-void
-on_button2_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-gtk_main_quit();
-}
-
-
-void
-on_modf_clicked                        (GtkButton       *button,
-                                        gpointer         user_data)
-{
-//GtkWidget *label=lookup_widget(GTK_WIDGET(button),"label16");
-//gtk_label_set_text(GTK_LABEL(label),v.test);
-dell_user((char *)h1.nom_hotel);
-/*****Na3mlo Actualiser lil liste **************/
-GtkWidget *fenetre_afficher=lookup_widget(GTK_WIDGET(button),"fenetre_afficher");
-
-GtkWidget *fenetre_ajout;
-fenetre_ajout=lookup_widget(GTK_WIDGET(button),("fenetre_ajout"));
-
-gtk_widget_destroy(fenetre_afficher);
-fenetre_ajout=create_fenetre_ajout();
-gtk_widget_show(fenetre_ajout);
-GtkWidget *Nom_hotel=lookup_widget(fenetre_ajout,"Nom_hotel");
-GtkWidget *adresse=lookup_widget(fenetre_ajout,"adresse");
-GtkWidget *num_responsable=lookup_widget(fenetre_ajout,"num_responsable");
-
-gtk_entry_set_text(GTK_LABEL(Nom_hotel),h1.nom_hotel);
-gtk_entry_set_text(GTK_LABEL(adresse),h1.adresse);
-gtk_entry_set_text(GTK_LABEL(num_responsable),h1.num_responsable);
-}
 
 void
 on_closebutton1_clicked                (GtkButton       *button,
@@ -164,8 +228,61 @@ void
 on_closebutton2_clicked                (GtkButton       *button,
                                         gpointer         user_data)
 {
-GtkWidget *dialog2=lookup_widget(GTK_WIDGET(button),"dialog2");
+GtkWidget *dialog2=lookup_widget(GTK_WIDGET(button),("dialog2"));
 
 gtk_widget_destroy(dialog2);
-;}
+}
+
+
+void
+on_closebutton3_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+GtkWidget *dialog3=lookup_widget(GTK_WIDGET(button),("dialog3"));
+
+gtk_widget_destroy(dialog3);
+}
+
+
+void
+on_closebutton4_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+GtkWidget *dialog4=lookup_widget(GTK_WIDGET(button),("dialog4"));
+
+gtk_widget_destroy(dialog4);
+}
+
+
+void
+on_button1_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+dell_user_res((char *)l.marque);
+/*****Na3mlo Actualiser lil liste **************/
+GtkWidget *window1=lookup_widget(GTK_WIDGET(button),"window1");
+GtkWidget *treeview2;
+
+treeview2=lookup_widget(window1,"treeview2");
+
+Afficher(treeview2,z);
+gtk_widget_show(treeview2);
+}
+
+
+void
+on_button2_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+reserve r;
+GtkWidget *window1=lookup_widget(GTK_WIDGET(button),"window1");
+GtkWidget *Fenetre=lookup_widget(GTK_WIDGET(button),"Fenetre");
+gtk_widget_destroy(window1);
+Fenetre=create_Fenetre();
+gtk_widget_show(Fenetre);
+GtkWidget *treeview1;
+treeview1=lookup_widget(Fenetre,"treeview1");
+Afficher (treeview1,z);
+
+}
 
