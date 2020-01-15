@@ -77,6 +77,7 @@ void afficher_hotel(GtkWidget *show,hotel h)
       g_object_unref(store);
 
 }
+/*
 void supprimer(char *nomb)
 {
  
@@ -110,7 +111,7 @@ while(fread(&h1,sizeof(hotel),1,f1))
 
 
 
-}//*
+}//*/
 
 void supprimer1 (char *nom_hotel)
 {
